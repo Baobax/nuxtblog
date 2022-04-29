@@ -18,7 +18,7 @@
             />
           </div>
         </v-col>
-        <v-col v-for="post in 4" :key="post" cols="12" md="6">
+        <v-col v-for="post in posts" :key="post.slug" cols="12" md="6">
           <v-card elevation="0">
             <v-card-title>My First Blog</v-card-title>
             <v-card-text
@@ -52,8 +52,34 @@
 export default {
   name: 'HomePage',
   layout: 'DefaultLayout',
+  async asyncData({ $content }) {
+    const limit = 5
+    const page = 1
+
+    const fetchedPosts = await $content()
+      .limit(limit)
+      .sortBy('createdAt', 'desc')
+      .skip((limit - 1) * (page - 1))
+      .fetch()
+      .catch((error) => {
+        error({ statusCode: 404, message: 'Page not found' })
+      })
+
+    const nextPage = fetchedPosts.length === limit
+    const posts = nextPage ? fetchedPosts.slice(0, -1) : fetchedPosts
+
+    return {
+      page,
+      limit,
+      posts,
+      nextPage,
+    }
+  },
   data: () => ({
     category: 'All',
   }),
+  // mounted() {
+  //   console.log(this.posts)
+  //   }
 }
 </script>
