@@ -20,14 +20,12 @@
         </v-col>
         <v-col v-for="post in posts" :key="post.slug" cols="12" md="6">
           <v-card elevation="0">
-            <v-card-title>My First Blog</v-card-title>
-            <v-card-text
-              >Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
-              ratione quam quia eveniet repellendus inventore sint eius possimus
-              debitis blanditiis.</v-card-text
-            >
+            <v-card-title>{{ post.title }}</v-card-title>
+            <v-card-text>
+              <nuxt-content :document="{ body: post.excerpt }" />
+            </v-card-text>
             <v-card-actions>
-              <v-btn text to="/1">Read More</v-btn>
+              <v-btn text :to="post.path">Read More</v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -80,6 +78,6 @@ export default {
   }),
   // mounted() {
   //   console.log(this.posts)
-  //   }
+  // },
 }
 </script>
