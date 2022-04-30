@@ -21,6 +21,14 @@
         <v-col v-for="post in posts" :key="post.slug" cols="12" md="6">
           <v-card elevation="0">
             <v-card-title>{{ post.title }}</v-card-title>
+            <v-card-subtitle>
+              {{
+                new Intl.DateTimeFormat('en-UK', {
+                  dateStyle: 'short',
+                  timeStyle: 'short',
+                }).format(new Date(post.createdAt))
+              }}
+            </v-card-subtitle>
             <v-card-text>
               <nuxt-content :document="{ body: post.excerpt }" />
             </v-card-text>
