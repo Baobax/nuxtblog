@@ -32,11 +32,11 @@
       </v-row>
       <v-row class="post-pagination">
         <v-col cols="12" class="text-right">
-          <v-btn>
+          <v-btn :disabled="page === 1" @click="fetchPrev">
             <v-icon small>mdi-arrow-left</v-icon>
             Prev.
           </v-btn>
-          <v-btn>
+          <v-btn :disabled="!nextPage" @click="fetchNext">
             <v-icon small>mdi-arrow-right</v-icon>
             Next
           </v-btn>
@@ -79,5 +79,27 @@ export default {
   // mounted() {
   //   console.log(this.posts)
   // },
+  methods: {
+    async fetchNext() {
+      this.page += 1
+      await this.fetchPosts()
+    },
+    async fetchPrev() {
+      this.page -= 1
+      await this.fetchPosts()
+    },
+    async fetchPosts() {
+      const fetchedPosts = await this.$content()
+        .limit(this.limit)
+        .sortBy('createdAt', 'desc')
+        .skip((this.limit - 1) * (this.page - 1))
+        .fetch()
+
+      this.nextPage = fetchedPosts.length === this.limit
+      const posts = this.nextPage ? fetchedPosts.slice(0, -1) : fetchedPosts
+
+      this.posts = posts
+    },
+  },
 }
 </script>

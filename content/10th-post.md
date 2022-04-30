@@ -1,7 +1,7 @@
 ---
 title: 10th Post
 description: Take your blogging to the next level with this tutorial
-category: youtube
+category: Youtube
 tags:
   - Nuxt.js
   - JavaScript

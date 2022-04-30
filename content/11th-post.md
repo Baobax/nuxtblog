@@ -1,7 +1,7 @@
 ---
-title: Creating Awesome Site
+title: 11th Post
 description: Take your blogging to the next level with this tutorial
-category: Coding
+category: Office
 tags:
   - Nuxt.js
   - JavaScript

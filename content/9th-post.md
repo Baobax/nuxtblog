@@ -1,7 +1,7 @@
 ---
 title: 9th Post
 description: Take your blogging to the next level with this tutorial
-category: coding
+category: Coding
 tags:
   - Nuxt.js
   - JavaScript
