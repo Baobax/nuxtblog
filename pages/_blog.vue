@@ -23,7 +23,7 @@ export default {
   name: 'PostPage',
   layout: 'DefaultLayout',
   async asyncData({ $content, error, params }) {
-    // TODO > Paginate
+    // Pagination
 
     const [prev, next] = await $content()
       .only(['path'])
@@ -45,6 +45,36 @@ export default {
       post,
       prev,
       next,
+    }
+  },
+  head() {
+    return {
+      title: this.post.title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.post.description,
+        },
+        // Open Graph
+        { hid: 'og:title', property: 'og:title', content: this.post.title },
+        {
+          hid: 'og:description',
+          name: 'og:description',
+          content: this.post.description,
+        },
+        // Twitter Card
+        {
+          hid: 'twitter:title',
+          name: 'twitter:title',
+          content: this.post.title,
+        },
+        {
+          hid: 'twitter:description',
+          name: 'twitter:description',
+          content: this.post.description,
+        },
+      ],
     }
   },
 }
