@@ -8,7 +8,7 @@
 
       <v-row v-if="!posts.length">
         <v-col cols="12">
-          <p>No posts found, yet <span>😀</span></p>
+          <p>No posts found, yetinde <span>😀</span></p>
         </v-col>
       </v-row>
 
